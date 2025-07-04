@@ -1,0 +1,12 @@
+[
+  { "keyword": "cmd.exe", "verdict": "Spawns command prompt" },
+  { "keyword": "powershell", "verdict": "May attempt to execute PowerShell commands" },
+  { "keyword": "reg add", "verdict": "Modifies Windows Registry" },
+  { "keyword": "schtasks", "verdict": "Schedules a persistent task" },
+  { "keyword": "curl", "verdict": "May attempt to download a file" },
+  { "keyword": "wget", "verdict": "May attempt to download a file" },
+  { "keyword": "ftp", "verdict": "May connect to external server" },
+  { "keyword": "whoami", "verdict": "Attempts privilege detection" },
+  { "keyword": "netstat", "verdict": "Checks network connections" },
+  { "keyword": "taskkill", "verdict": "Attempts to kill other processes" }
+]

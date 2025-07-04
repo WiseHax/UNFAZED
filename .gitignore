@@ -1,0 +1,21 @@
+# Ignore compiled executables and build folders
+*.exe
+build/
+dist/
+
+# Ignore sample binaries and output
+samples/
+output/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyd
+*.log
+
+# Env
+.env
+
+# Rust build
+target/
+Cargo.lock
