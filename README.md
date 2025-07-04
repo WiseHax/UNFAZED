@@ -49,8 +49,6 @@ UNFAZED is a powerful offline malware analysis tool designed to assist cybersecu
 ---
 
 
----
-
 ## 🔞 Recent Additions
 
 ✅ Rust DLL + Python bindings (CTypes)  
