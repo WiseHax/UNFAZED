@@ -48,21 +48,6 @@ UNFAZED is a powerful offline malware analysis tool designed to assist cybersecu
 
 ---
 
-## 📁 Project Structure
-
-```
-
-UNFAZED/
-├── analyzer/            # Scanners (YARA, entropy, strings, behavior)
-├── m1/                  # Machine learning models & predictors
-├── rust\_core/           # Rust source for DLL bindings
-├── extractor.dll        # PE-based string extractor
-├── rust\_analysis\_lib.dll# Entropy + string engine
-├── main.py              # Core launcher
-├── build.bat            # One-click EXE builder
-└── README.md            # This file
-
-````
 
 ---
 
