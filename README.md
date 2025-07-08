@@ -1,94 +1,102 @@
-# 🛡 UNFAZED - Static Malware Analysis Framework
+
+# 🛡 UNFAZED - Static + Memory Malware Analysis Framework
 
 > Built by **Wxse00.dat** 🇵🇭 | Ethical. Patriotic. Local.  
 > Powered by **Python** 🐍, **Rust** 🦀, and **YARA** 🧬
 
-UNFAZED is a powerful offline malware analysis tool designed to assist cybersecurity researchers and threat analysts in identifying and classifying malicious files. It combines rule-based scanning, machine learning, and custom-built Rust DLLs for fast, efficient static analysis.
+UNFAZED is a powerful hybrid malware analysis tool for **offline static scanning**, **in-memory process detection**, and **AI-assisted classification**. Designed for ethical hackers, analysts, and researchers who want a fast, customizable, and portable solution.
 
 ---
 
 ## ⚙️ Features
 
-* 🔐 **Secure Offline Static Analysis**  
-  No internet required (except for optional OTX lookups).
+### 🔐 Offline Malware Analysis
+- No internet required (OTX lookup is optional)
 
-* 🔍 **File Fingerprinting**  
-  * MD5 / SHA1 / SHA256 hash generation
+### 🔍 Static File Scanning
+- Hashing (MD5, SHA1, SHA256)
+- Entropy & PE structure validation
+- YARA rule scanning
+- AI-assisted verdict: **Safe / Suspicious / Malicious**
+- Malware family classification (e.g., **RAT**, **Stealer**, **Ransomware**)
+- MITRE ATT&CK mapping via string correlation
+- Network Indicator Extraction: **IPs**, **URLs**, **domains**
+- Rust-powered fast string + entropy extraction
 
-* 🧬 **YARA Rule Scanning**  
-  * Detect malware patterns via rule-based matching
+### 🧠 Memory & Process Scanner (NEW in Phase 2)
+- Detects live suspicious processes
+- Tags processes with:
+  - `AUTO-SUSPICIOUS`: based on path, memory, name, or parent
+  - `SUSPICIOUS`: known abused names (e.g. `cmd.exe`, `powershell.exe`)
+- In-memory process dumper via PID
+- Memory dump analyzer (auto string extraction + IOC detection)
+- Outputs `.txt` report for human-readable indicators
 
-* ⚙️ **PE Header Anomaly Detection**  
-  * Flags malformed or suspicious PE sections
-
-* 🧠 **AI-Assisted Verdicts**  
-  * Predicts if a file is **Safe**, **Suspicious**, or **Malicious**  
-  * Powered by a trained ML model using extracted strings
-
-* 🧬 **Malware Family Classification**  
-  * Identifies malware type (e.g. `RAT`, `Stealer`, `Downloader`, `Infostealer`, etc.)
-
-* 🧠 **MITRE ATT\&CK Mapping**  
-  * Extracted strings are mapped to MITRE tactics & techniques
-
-* 🕸 **Network Indicator Extraction**  
-  * Extracts possible IPs, URLs, and domains from binaries
-
-* ⚡ **Rust-Powered Performance**  
-  * High-speed string extraction and entropy calculations via custom DLL
-
-* 📤 **Report Generation**  
-  * Full results exported to JSON for later review or automation
-
-* 🎨 **Colored Terminal UI**  
-  * Uses `pystyle` for enhanced CLI display and interaction
-
-* 💡 **Fully Portable Executable**  
-  * Built with PyInstaller into a standalone `.exe` (no Python required)
+### 💡 Smart Features
+- Option to **skip saving reports**
+- Live Log Viewer
+- Colored CLI with `pystyle`
+- Fully bundled into `.exe` via PyInstaller
 
 ---
 
 ## 📁 Project Structure
 
 ```
-
 UNFAZED/
-├── analyzer/            # Scanners (YARA, entropy, strings, behavior)
-├── m1/                  # Machine learning models & predictors
-├── rust\_core/           # Rust source for DLL bindings
-├── extractor.dll        # PE-based string extractor
-├── rust\_analysis\_lib.dll# Entropy + string engine
-├── main.py              # Core launcher
-├── build.bat            # One-click EXE builder
-└── README.md            # This file
-
-````
-
----
-
-## 🔞 Recent Additions
-
-✅ Rust DLL + Python bindings (CTypes)  
-✅ Integrated `.pkl` AI models (bundled in EXE)  
-✅ Malware Family Classifier using `sklearn`  
-✅ Improved PyInstaller `build.bat` with all dependencies  
-✅ Dynamic string & MITRE mapping structure  
+├── main.py                      Entry point
+├── build.bat                    Auto-build EXE
+├── modules/
+│   ├── memory_scanner.py        Process scanner (with auto-detection)
+│   ├── memory_dumper.py         Dump memory from running PIDs
+│   ├── memory_analyzer.py       Analyze dumped memory for strings/IOCs
+│   ├── mitre_map.py             MITRE tactic/technique mapping
+│   └── ...                      Other analyzers (entropy, strings, etc.)
+├── m1/                          AI models for classification
+├── rust_core/                   Rust DLL source (string/entropy engine)
+├── extractor.dll                Fast string extractor
+├── rust_analysis_lib.dll        Entropy engine (Rust)
+├── output/
+│   ├── reports/                 JSON + HTML output
+│   └── memory_dumps/            Saved .bin dumps and .txt reports
+└── .env                         (optional) OTX API key
+```
 
 ---
 
-## 📦 Requirements (if building from source)
+## Menu Options (Current CLI)
 
-* Python 3.10+  
-* Rust (required to compile `rust_analysis_lib.dll`)  
-* YARA (CLI tool or Python binding)  
+```
+[ MENU ]
+   [1] Scan File
+   [2] Exit
+   [3] Update YARA Rules
+   [4] View Live Logs
+   [5] Scan Suspicious Memory (In-Memory Threats)
+   [6] Analyze Memory Dump (.bin)
+```
 
-Install Python requirements:
+---
 
-```bash
-pip install -r requirements.txt
-````
+## Sample Output
 
-Create your `.env` for OTX threat intelligence (optional):
+```
+✔ Verdict: Malicious
+✔ Malware Family: Stealer
+✔ MITRE: T1059.003 (Command & Script Interpreter: Windows Command Shell)
+✔ Extracted IPs: 45.13.89.3, hxxp://evil.site/download.exe
+✔ Entropy: 7.99 (High - Packed)
+✔ Memory Scan: 3 suspicious processes, 1 dump saved
+```
+
+---
+
+## Requirements (if building from source)
+
+- Python 3.10+
+- Rust (for compiling `rust_analysis_lib.dll`)
+- `pip install -r requirements.txt`
+- Optional `.env` for OTX API:
 
 ```env
 OTX_API_KEY=your_otx_key_here
@@ -96,66 +104,34 @@ OTX_API_KEY=your_otx_key_here
 
 ---
 
-## 🏗 How to Build EXE
-
-Just run:
+## How to Build the EXE
 
 ```bash
 build.bat
 ```
 
-It will:
-
-* Compile your Python scripts
-* Bundle all `.pkl` models + DLLs
-* Output a standalone executable in `dist/main.exe`
-
-✅ All required files (models, DLLs) are embedded — ready to share.
-
----
-
-## 🧪 Sample Output
-
-* ✔ Verdict: **Malicious**
-* ✔ Malware Family: **RAT**
-* ✔ MITRE: `T1059.001 (PowerShell)`
-* ✔ Extracted IPs: `192.168.1.5`, `hxxp://malware-site.com`
-* ✔ Entropy: `7.89 (High)`
+Produces: `dist/main.exe`  
+✔ Includes `.pkl` models, `.dll` bindings, and all modules.
 
 ---
 
 ## 📥 Downloads
 
-The latest compiled executable (`main.exe`) is available in the **Releases** section of this GitHub repository.
-
-You can download it directly here:
-[UNFAZED Releases](https://github.com/WiseHax/UNFAZED/releases)
-
----
-
-### Should I include `build.bat` in the Releases?
-
-* It’s usually better to **keep the `build.bat` file in the source code** so developers can build their own executables if needed.
-* The `build.bat` file **does not need to be included in the Releases**, since Releases should ideally contain only ready-to-use binaries and related assets.
-* So for Releases, **just upload the `main.exe` (or renamed like UNFAZED.exe)**.
-
-If you want, you can also upload a zipped archive containing the EXE and any other required runtime files in the Releases for easier download.
+Grab the latest compiled release from:  
+👉 [UNFAZED Releases](https://github.com/WiseHax/UNFAZED/releases)
 
 ---
 
 ## ⚠️ Disclaimer
 
-UNFAZED is intended **only for ethical research and malware analysis training**.
-The author is **not responsible** for any misuse or illegal distribution. Use responsibly.
+This tool is intended for **educational and ethical research use only**.  
+Do not use it on live production environments or real malware unless in a controlled lab.  
+The author assumes **no liability** for misuse.
 
 ---
 
-## ❤️ Credits
+## Credits
 
-* Built by **Wxse00.dat**
-* Powered by the Filipino cybersecurity community 🇵🇭
-* Salute to ethical hackers and defenders
-
-```
-
-
+- Created by **Wxse00.dat**
+- Community-supported by 🇵🇭 Filipino Cybersecurity Researchers
+- With ❤️ to all ethical hackers, reverse engineers, and blue teamers
