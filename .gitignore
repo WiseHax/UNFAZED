@@ -1,0 +1,21 @@
+*.exe
+build/
+dist/
+
+samples/
+output/
+
+__pycache__/
+*.pyc
+*.pyd
+*.log
+
+.env
+
+target/
+Cargo.lock
+
+# Added by Gemini
+rules/rules-master.zip
+*.bin
+venv/

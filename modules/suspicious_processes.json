@@ -1,0 +1,17 @@
+{
+    "suspicious_names": [
+        "powershell.exe", "cmd.exe", "wscript.exe", "cscript.exe", "regsvr32.exe",
+        "rundll32.exe", "mshta.exe", "schtasks.exe", "certutil.exe", "bitsadmin.exe",
+        "explorer.exe", "svchost.exe", "conhost.exe", "lsass.exe", "wininit.exe",
+        "winlogon.exe", "spoolsv.exe", "csrss.exe", "services.exe", "update.exe",
+        "service.exe", "system.exe", "payload.exe", "agent.exe", "stub.exe",
+        "runtimebroker.exe", "host.exe", "launcher.exe", "backdoor.exe", "trojan.exe",
+        "injector.exe", "loader.exe", "svhost.exe", "googleupdate.exe",
+        "javaupdate.exe", "onedriveupdate.exe", "adobeflash.exe", "windowsupdate.exe",
+        "winword.exe", "excel.exe", "outlook.exe", "chrome.exe", "firefox.exe",
+        "acrobat.exe", "teams.exe", "zoom.exe", "discord.exe"
+    ],
+    "suspicious_parents": [
+        "winword.exe", "excel.exe", "outlook.exe", "powershell.exe", "cmd.exe"
+    ]
+}

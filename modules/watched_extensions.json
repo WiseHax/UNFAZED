@@ -1,0 +1,5 @@
+{
+    "watched_extensions": [
+        ".exe", ".zip", ".rar", ".dll", ".bat", ".scr", ".js", ".vbs"
+    ]
+}

@@ -1,0 +1,22 @@
+pefile
+pystyle
+python-dotenv
+requests
+yara-python
+
+scikit-learn
+joblib
+torch
+transformers
+
+reportlab
+matplotlib
+
+tqdm
+psutil
+
+beautifulsoup4
+
+pywin32; platform_system == "Windows"
+
+pytest

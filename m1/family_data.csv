@@ -1,0 +1,11 @@
+string,label
+cmd.exe spawns process,Stealer
+hidden powershell invocation,RAT
+writes ransom note and encrypts files,Ransomware
+downloads from external IP,Downloader
+accesses saved passwords,Infostealer
+executes svchost injection,Rootkit
+injects explorer.exe,Stealer
+keylogger active capture,RAT
+creates startup persistence,RAT
+contacts C2 via Telegram,Stealer

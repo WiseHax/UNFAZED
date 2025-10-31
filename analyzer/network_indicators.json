@@ -1,0 +1,16 @@
+{
+    "ip_regex": "\b(?:\d{1,3}\.){3}\d{1,3}(?::\d{1,5})?\b",
+    "url_regex": "https?://[^\s\"\\]+",
+    "domain_regex": "\b(?:[a-zA-Z0-9-]+\.)+(?:com|net|org|info|biz|io|xyz|ph|ru|cn|onion)\b",
+    "email_regex": "[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+",
+    "onion_regex": "\b[a-z2-7]{16,56}\.onion\b",
+    "hex_url_regex": "(?:[0-9a-fA-F]{2}){5,}",
+    "c2_patterns": [
+        "/gate\.php",
+        "/panel\.php",
+        "/upload\.php",
+        "/admin\.php"
+    ],
+    "discord_webhook_regex": "https://discord(?:app)?\.com/api/webhooks/[0-9]+/[a-zA-Z0-9_-]+",
+    "telegram_bot_regex": "https://api\.telegram\.org/bot[a-zA-Z0-9]+/sendMessage"
+}
